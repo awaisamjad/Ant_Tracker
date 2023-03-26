@@ -18,6 +18,7 @@ while True:
     countours,_ = cv2.findContours(mask, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
     coordinates = []
     for cnt in countours:
+        #print(cnt)
         coordinates.append(cnt)
         area = cv2.contourArea(cnt)
         if area > 10 and area < 100:
@@ -37,7 +38,7 @@ cap.release()
 cv2.destroyAllWindows()
 
 
-print(coordinates)
+# print(coordinates)
 # import cv2
 # import numpy as np
 
