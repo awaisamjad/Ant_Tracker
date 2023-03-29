@@ -1,0 +1,3 @@
+pygame.draw.line(screen, (255,0,0), [screen_center[0] + x_15[i],screen_center[1] - y_15[i]], [screen_center[0] + x_15[i+1],screen_center[1] - y_15[i+1]], 2) # x negative y negative
+            # pygame.draw.line(screen, (255,0,0), [screen_center[0] + x_19[i],screen_center[1] - y_19[i]], [screen_center[0] + x_19[i+1],screen_center[1] - y_19[i+1]], 2) # x negative y negative
+            # pygame.draw.line(screen, (255,0,0), [screen_center[0] + x_20[i],screen_center[1] - y_20[i]], [screen_center[0] + x_20[i+1],screen_center[1] - y_20[i+1]], 2) # x positive y positive
