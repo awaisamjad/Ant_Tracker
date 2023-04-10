@@ -1,14 +1,12 @@
 import pandas as pd
 import pygame
-import random
-import numpy as np
 import cv2
 df_col6_vid1 = pd.read_csv("sorted_data\colony_1_data_vid_1.csv")
 df_col1_vid4 = pd.read_csv("sorted_data\colony_1_data_vid_1.csv")
-# temp_df = pd.read_csv("temperature.csv")
-# temp = temp_df["Temperature"]
-temp = [14,14,14,14,14,14,13,13,13,13,13,13,13,14,14,14,14,14,15,15,15,15,15,15,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,17,17,17,17,17,17,17,17,17,18,18,18,18,18,17,17,17,17,17,17,16,16,16,16,16,15,15,15,15,15,14,14,14,14,14,14,13,13,13,13,13,13,13,13,14,14,14,14,14,14,15,15,15,15,15,16,16,16,16,17,17,17,17,17,17,17,17,17,16,16,16,16,16,15,15,16,16,16,16,17,17,17,17,17,17,17,17,18,18,18,18,18,17,17,17,17,17,17,16,16,16,16,16,15,15,15,15,15,14,14,14,14,14,14,13,13,13,13,13,13,13,13,14,14,14,14,14,14,15,15,15,15,15,16,16,16,16,17,17,17,17,18,18,18,18,19,19,20,20,20,21,21,22,22,23,23,23,24,24,24,24,24,24,24,24,24,24,24,24,23,23,23,23,23,22,22,22,22,21,21,21,21,20,20,20,20,19,19,19,19,18,18,18,18,17,17,17,17,16,16,16,16,15,15,15,15,14,14,14,14,14,14,14,14,14,14,15,15,15,15,15,15,15,15,15,15,15,15,14,14,14,14,14,14,14,14,14,14,14,14,14,14,14,14,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,14,14,14,15,15,15,16,16,17,18,18,19,19,20,20,21,21,22,22,23,23,24,24,24,24,24,24,24,24,23,23,22,22,21,21,20,20,19,19,18,18,17,17,16,16,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,]
-temp = [i for i in range(0,len(temp),2)]
+temp_df = pd.read_csv("temperature.csv")
+temp = temp_df["Temperature"] # get temperature data
+
+temp = [i for i in range(0,len(temp),2)] # get every 2nd value to increase difference between intial and next value
 
 x_14_col6_vid1 = list(df_col6_vid1[df_col6_vid1["ant"] == 1]["x"])
 y_14_col6_vid1 = list(df_col6_vid1[df_col6_vid1["ant"] == 1]["y"])
@@ -48,12 +46,13 @@ y_9_col1_vid4 = list(df_col1_vid4[df_col1_vid4["ant"] == 49]["y"])
 
 x_17_col1_vid4 = list(df_col1_vid4[df_col1_vid4["ant"] == 17]["x"])
 y_17_col1_vid4 = list(df_col1_vid4[df_col1_vid4["ant"] == 17]["y"])
+# create lists of all the ants used x and y values
 
 pygame.init()
 screen_width = 1920
 screen_height = 1080
-screen = pygame.display.set_mode((screen_width, screen_height))
-screen_center = [screen_width // 2, screen_height // 2]
+screen = pygame.display.set_mode((screen_width, screen_height)) # screen with 1920 width, 1080 height
+screen_center = [screen_width // 2, screen_height // 2] # screent center
 
 #background
 background = pygame.image.load("background.jpg")
@@ -80,10 +79,10 @@ while running:
                 running = False
         blue = 100
         green = 0
-        line_colour = (50, 205, 50)
-        line_stroke = 5 # lime green
-        pygame.time.wait(1000)
-        for i in range(1000): #x_15 has the highest length (233) so its used
+        line_colour = (50, 205, 50) # line colour, lime green
+        line_stroke = 5 
+
+        for i in range(1000): # put all the x and y values for the ants in the center and then draw from there
             pygame.draw.line(screen, line_colour, [(screen_center[0] + x_14_col6_vid1[i])-x_14_col6_vid1[0],(screen_center[1] - y_14_col6_vid1[i])+y_14_col6_vid1[0]], [(screen_center[0] + x_14_col6_vid1[i+1])-x_14_col6_vid1[0],(screen_center[1] - y_14_col6_vid1[i+1])+y_14_col6_vid1[0]], line_stroke) # x positive y positive
 
             pygame.draw.line(screen, line_colour, [(screen_center[0] + x_15_col6_vid1[i])-x_15_col6_vid1[0],(screen_center[1] - y_15_col6_vid1[i])+y_15_col6_vid1[0]], [(screen_center[0] + x_15_col6_vid1[i+1])-x_15_col6_vid1[0],(screen_center[1] - y_15_col6_vid1[i+1])+y_15_col6_vid1[0]], line_stroke) # x negative y negative
@@ -94,11 +93,11 @@ while running:
 
 
 
-            #pygame.draw.line(screen, line_colour, [(screen_center[0] + x_14_col6_vid1[i])-x_14_col6_vid1[0],(screen_center[1] - y_14_col6_vid1_divided[i])+y_14_col6_vid1_divided[0]], [(screen_center[0] + x_14_col6_vid1[i+1])-x_14_col6_vid1[0],(screen_center[1] - y_14_col6_vid1_divided[i+1])+y_14_col6_vid1_divided[0]], line_stroke)
+            pygame.draw.line(screen, line_colour, [(screen_center[0] + x_14_col6_vid1[i])-x_14_col6_vid1[0],(screen_center[1] - y_14_col6_vid1_divided[i])+y_14_col6_vid1_divided[0]], [(screen_center[0] + x_14_col6_vid1[i+1])-x_14_col6_vid1[0],(screen_center[1] - y_14_col6_vid1_divided[i+1])+y_14_col6_vid1_divided[0]], line_stroke)
             
             pygame.draw.line(screen, line_colour, [(screen_center[0] + x_15_col6_vid1[i])-x_15_col6_vid1[0],(screen_center[1] - y_15_col6_vid1_divided[i])+y_15_col6_vid1_divided[0]], [(screen_center[0] + x_15_col6_vid1[i+1])-x_15_col6_vid1[0],(screen_center[1] - y_15_col6_vid1_divided[i+1])+y_15_col6_vid1_divided[0]], line_stroke) # x negative y negative
             
-            #pygame.draw.line(screen, line_colour, [(screen_center[0] + x_19_col6_vid1[i])-x_19_col6_vid1[0],(screen_center[1] - y_19_col6_vid1_divided[i])+y_19_col6_vid1_divided[0]], [(screen_center[0] + x_19_col6_vid1[i+1])-x_19_col6_vid1[0],(screen_center[1] - y_19_col6_vid1_divided[i+1])+y_19_col6_vid1_divided[0]], line_stroke)
+            pygame.draw.line(screen, line_colour, [(screen_center[0] + x_19_col6_vid1[i])-x_19_col6_vid1[0],(screen_center[1] - y_19_col6_vid1_divided[i])+y_19_col6_vid1_divided[0]], [(screen_center[0] + x_19_col6_vid1[i+1])-x_19_col6_vid1[0],(screen_center[1] - y_19_col6_vid1_divided[i+1])+y_19_col6_vid1_divided[0]], line_stroke)
             
             
             
@@ -117,11 +116,11 @@ while running:
             pygame.draw.line(screen, line_colour, [(screen_center[0] + x_17_col1_vid4[i])-x_17_col1_vid4[0],(screen_center[1] - y_17_col1_vid4[i])+y_17_col1_vid4[0]], [(screen_center[0] + x_17_col1_vid4[i+1])-x_17_col1_vid4[0],(screen_center[1] - y_17_col1_vid4[i+1])+y_17_col1_vid4[0]], line_stroke)
             
             
-            pygame.draw.circle(screen, (0,green,blue), screen_center, 45)
+            pygame.draw.circle(screen, (0,green,blue), screen_center, 45) # create circle for humidity
         
             blue = blue + 2
             green = green + 2
-            time_delay = temp[i]
+            time_delay = 50 -  temp[i] # the time delay becomes the temperature value so a higher value results in a lower delay increasing speed 
             
             # Convert Pygame screen to OpenCV format
             frame = pygame.surfarray.array3d(screen)
@@ -131,5 +130,5 @@ while running:
             out.write(frame)
             out.release()
     
-            pygame.display.update()
-            pygame.time.wait(time_delay)
+            pygame.display.update() # show the lines on the screen
+            pygame.time.wait(time_delay) # wait the time delay before next lines are shown on screen
