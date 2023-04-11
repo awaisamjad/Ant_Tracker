@@ -39,7 +39,7 @@
 - where the ant paths were selected for the visulisation
 
 ### raw_tracking_dataset.csv
-- the dataset found from a study that was then sorted in main.ipynb
+- the dataset found from a study that was then sorted in main.ipynb. data can be found here https://www.nature.com/articles/s41598-019-49655-3#Abs1
 
 ### temperature.csv
 - the temperature values from the Arduino sorted into a csv. it was cleaned.
